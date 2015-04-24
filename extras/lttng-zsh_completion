@@ -1,0 +1,15 @@
+#compdef lttng
+
+local -a options commands 
+
+options=()
+for opt in $(lttng --list-options); do
+	options+=("${opt}")
+done
+
+commands=()
+for cmd in $(lttng --list-commands); do
+	commands+=("${cmd}")
+done
+
+_describe 'values' options -- commands
