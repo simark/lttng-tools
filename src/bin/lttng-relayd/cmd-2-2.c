@@ -20,6 +20,8 @@
 #define _LGPL_SOURCE
 #include <assert.h>
 
+#include "cmd-2-2.h"
+
 #include <common/common.h>
 #include <common/sessiond-comm/relayd.h>
 
