@@ -39,7 +39,7 @@ struct ppoll_thread_data {
 	int value;
 };
 
-void test_select_big(void)
+static void test_select_big(void)
 {
 	fd_set rfds, wfds, exfds;
 	struct timeval tv;
@@ -88,7 +88,7 @@ end:
 	return;
 }
 
-void test_pselect(void)
+static void test_pselect(void)
 {
 	fd_set rfds;
 	struct timespec tv;
@@ -121,7 +121,7 @@ void test_pselect(void)
 
 }
 
-void test_select(void)
+static void test_select(void)
 {
 	fd_set rfds;
 	struct timeval tv;
@@ -154,7 +154,7 @@ void test_select(void)
 
 }
 
-void test_poll(void)
+static void test_poll(void)
 {
 	struct pollfd ufds[NB_FD];
 	char buf[BUF_SIZE];
@@ -178,7 +178,7 @@ void test_poll(void)
 	}
 }
 
-void test_ppoll(void)
+static void test_ppoll(void)
 {
 	struct pollfd ufds[NB_FD];
 	char buf[BUF_SIZE];
@@ -210,7 +210,7 @@ void test_ppoll(void)
 	}
 }
 
-void test_ppoll_big(void)
+static void test_ppoll_big(void)
 {
 	struct pollfd ufds[MAX_FDS];
 	char buf[BUF_SIZE];
@@ -249,7 +249,7 @@ void test_ppoll_big(void)
 	return;
 }
 
-void test_epoll(void)
+static void test_epoll(void)
 {
 	int ret, epollfd;
 	char buf[BUF_SIZE];
@@ -291,7 +291,7 @@ end:
 	return;
 }
 
-void test_pepoll(void)
+static void test_pepoll(void)
 {
 	int ret, epollfd;
 	char buf[BUF_SIZE];
@@ -333,7 +333,7 @@ end:
 	return;
 }
 
-void run_working_cases(void)
+static void run_working_cases(void)
 {
 	int ret;
 	int pipe_fds[2];
@@ -379,7 +379,7 @@ end:
  * segfault (eventually with a "*** stack smashing detected ***" message).
  * The event should contain an array of 100 FDs filled with garbage.
  */
-void ppoll_fds_buffer_overflow(void)
+static void ppoll_fds_buffer_overflow(void)
 {
 	struct pollfd ufds[NB_FD];
 	char buf[BUF_SIZE];
@@ -410,7 +410,7 @@ void ppoll_fds_buffer_overflow(void)
  * cleanly fail with a "Invalid argument".
  * The event should contain an empty array of FDs and overflow = 1.
  */
-void ppoll_fds_ulong_max(void)
+static void ppoll_fds_ulong_max(void)
 {
 	struct pollfd ufds[NB_FD];
 	char buf[BUF_SIZE];
@@ -440,7 +440,7 @@ void ppoll_fds_ulong_max(void)
  * Pass an invalid file descriptor to pselect6(). The syscall should return
  * -EBADF. The recorded event should contain a "ret = -EBADF (-9)".
  */
-void pselect_invalid_fd(void)
+static void pselect_invalid_fd(void)
 {
 	fd_set rfds;
 	int ret;
@@ -486,7 +486,7 @@ error:
  * Invalid pointer as writefds, should output a ppoll event
  * with 0 FDs.
  */
-void pselect_invalid_pointer(void)
+static void pselect_invalid_pointer(void)
 {
 	fd_set rfds;
 	int ret;
@@ -517,7 +517,7 @@ void pselect_invalid_pointer(void)
  * Pass an invalid pointer to epoll_pwait, should fail with
  * "Bad address", the event returns 0 FDs.
  */
-void epoll_pwait_invalid_pointer(void)
+static void epoll_pwait_invalid_pointer(void)
 {
 	int ret, epollfd;
 	char buf[BUF_SIZE];
@@ -561,7 +561,7 @@ end:
  * Set maxevents to INT_MAX, should output "Invalid argument"
  * The event should return an empty array.
  */
-void epoll_pwait_int_max(void)
+static void epoll_pwait_int_max(void)
 {
 	int ret, epollfd;
 	char buf[BUF_SIZE];
@@ -600,7 +600,7 @@ end:
 	return;
 }
 
-void *ppoll_writer(void *arg)
+static void *ppoll_writer(void *arg)
 {
 	struct ppoll_thread_data *data = (struct ppoll_thread_data *) arg;
 
@@ -613,7 +613,7 @@ void *ppoll_writer(void *arg)
 	return NULL;
 }
 
-void do_ppoll(int *fds, struct pollfd *ufds)
+static void do_ppoll(int *fds, struct pollfd *ufds)
 {
 	int i, ret;
 	struct timespec ts;
@@ -642,7 +642,7 @@ void do_ppoll(int *fds, struct pollfd *ufds)
 	}
 }
 
-void stress_ppoll(int *fds, int value)
+static void stress_ppoll(int *fds, int value)
 {
 	pthread_t writer;
 	int iter, ret;
@@ -683,7 +683,7 @@ end:
  *
  * ppoll should work as expected and the trace should be readable at the end.
  */
-void ppoll_concurrent_write(void)
+static void ppoll_concurrent_write(void)
 {
 	int i, ret, fds[MAX_FDS];
 
@@ -708,7 +708,7 @@ void ppoll_concurrent_write(void)
 	return;
 }
 
-void *epoll_pwait_writer(void *addr)
+static void *epoll_pwait_writer(void *addr)
 {
 	srand(time(NULL));
 
@@ -725,7 +725,7 @@ void *epoll_pwait_writer(void *addr)
  * buffer allocated for the returned data. This should randomly segfault.
  * The trace should be readable and no kernel OOPS should occur.
  */
-void epoll_pwait_concurrent_munmap(void)
+static void epoll_pwait_concurrent_munmap(void)
 {
 	int ret, epollfd, i, fds[MAX_FDS];
 	char buf[BUF_SIZE];
@@ -807,16 +807,7 @@ end:
 	return;
 }
 
-void usage(poptContext optCon, int exitcode, char *error, char *addl)
-{
-	poptPrintUsage(optCon, stderr, 0);
-	if (error) {
-		fprintf(stderr, "%s: %s\n", error, addl);
-	}
-	exit(exitcode);
-}
-
-void print_list(void)
+static void print_list(void)
 {
 	fprintf(stderr, "Test list (-t X):\n");
 	fprintf(stderr, "\t1: Working cases for select, pselect6, poll, ppoll "

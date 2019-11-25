@@ -28,7 +28,9 @@
 #define VALUE (-1)
 #endif
 
-void call_tracepoint(void) {
+void call_tracepoint(void);
+void call_tracepoint(void)
+{
 	tracepoint(multi, tp, VALUE);
 }
 

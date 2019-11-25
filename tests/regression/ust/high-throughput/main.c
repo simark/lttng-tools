@@ -32,11 +32,11 @@
 #define TRACEPOINT_DEFINE
 #include "tp.h"
 
-void inthandler(int sig)
+static void inthandler(int sig)
 {
 }
 
-int init_int_handler(void)
+static int init_int_handler(void)
 {
 	int result;
 	struct sigaction act;
