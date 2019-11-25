@@ -62,7 +62,7 @@ const char file_contents[] = "Bacon ipsum dolor amet jerky drumstick sirloin "
 	"Landjaeger tri-tip salami leberkas ball tip, ham hock chuck sausage "
 	"flank jerky cupim. Pig bacon chuck pancetta andouille.";
 
-int fd_count(void)
+static int fd_count(void)
 {
 	DIR *dir;
 	struct dirent *entry;
