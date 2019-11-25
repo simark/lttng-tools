@@ -25,7 +25,8 @@ noinst_LTLIBRARIES = libcommon.la
 EXTRA_DIST = mi-lttng-3.0.xsd
 
 libcommon_la_SOURCES = \
-	action.c \
+	actions/action.c \
+	actions/notify.c \
 	buffer-usage.c \
 	buffer-view.h buffer-view.c \
 	common.h \
@@ -45,7 +46,6 @@ libcommon_la_SOURCES = \
 	location.c \
 	mi-lttng.c mi-lttng.h \
 	notification.c \
-	notify.c \
 	optional.h \
 	pipe.c pipe.h \
 	readwrite.c readwrite.h \
