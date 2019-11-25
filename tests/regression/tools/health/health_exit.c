@@ -40,6 +40,7 @@ int check_env_var(const char *env)
 
 /* Session daemon */
 
+int __testpoint_sessiond_thread_manage_clients(void);
 int __testpoint_sessiond_thread_manage_clients(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_MANAGE_CLIENTS_EXIT";
@@ -52,6 +53,7 @@ int __testpoint_sessiond_thread_manage_clients(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_registration_apps(void);
 int __testpoint_sessiond_thread_registration_apps(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_REG_APPS_EXIT";
@@ -63,6 +65,7 @@ int __testpoint_sessiond_thread_registration_apps(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_manage_apps(void);
 int __testpoint_sessiond_thread_manage_apps(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_MANAGE_APPS_EXIT";
@@ -75,6 +78,7 @@ int __testpoint_sessiond_thread_manage_apps(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_manage_kernel(void);
 int __testpoint_sessiond_thread_manage_kernel(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_MANAGE_KERNEL_EXIT";
@@ -86,6 +90,7 @@ int __testpoint_sessiond_thread_manage_kernel(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_manage_consumer(void);
 int __testpoint_sessiond_thread_manage_consumer(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_MANAGE_CONSUMER_EXIT";
@@ -97,6 +102,7 @@ int __testpoint_sessiond_thread_manage_consumer(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_ht_cleanup(void);
 int __testpoint_sessiond_thread_ht_cleanup(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_HT_CLEANUP_EXIT";
@@ -109,6 +115,7 @@ int __testpoint_sessiond_thread_ht_cleanup(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_app_manage_notify(void);
 int __testpoint_sessiond_thread_app_manage_notify(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_APP_MANAGE_NOTIFY_EXIT";
@@ -121,6 +128,7 @@ int __testpoint_sessiond_thread_app_manage_notify(void)
 	return 0;
 }
 
+int __testpoint_sessiond_thread_app_reg_dispatch(void);
 int __testpoint_sessiond_thread_app_reg_dispatch(void)
 {
 	const char *var = "LTTNG_SESSIOND_THREAD_APP_REG_DISPATCH_EXIT";
@@ -134,6 +142,7 @@ int __testpoint_sessiond_thread_app_reg_dispatch(void)
 
 /* Consumer daemon */
 
+int __testpoint_consumerd_thread_channel(void);
 int __testpoint_consumerd_thread_channel(void)
 {
 	const char *var = "LTTNG_CONSUMERD_THREAD_CHANNEL_EXIT";
@@ -146,6 +155,7 @@ int __testpoint_consumerd_thread_channel(void)
 	return 0;
 }
 
+int __testpoint_consumerd_thread_metadata(void);
 int __testpoint_consumerd_thread_metadata(void)
 {
 	const char *var = "LTTNG_CONSUMERD_THREAD_METADATA_EXIT";
@@ -158,6 +168,7 @@ int __testpoint_consumerd_thread_metadata(void)
 	return 0;
 }
 
+int __testpoint_consumerd_thread_data(void);
 int __testpoint_consumerd_thread_data(void)
 {
 	const char *var = "LTTNG_CONSUMERD_THREAD_DATA_EXIT";
@@ -170,6 +181,7 @@ int __testpoint_consumerd_thread_data(void)
 	return 0;
 }
 
+int __testpoint_consumerd_thread_sessiond(void);
 int __testpoint_consumerd_thread_sessiond(void)
 {
 	const char *var = "LTTNG_CONSUMERD_THREAD_SESSIOND_EXIT";
@@ -182,6 +194,7 @@ int __testpoint_consumerd_thread_sessiond(void)
 	return 0;
 }
 
+int __testpoint_consumerd_thread_metadata_timer(void);
 int __testpoint_consumerd_thread_metadata_timer(void)
 {
 	const char *var = "LTTNG_CONSUMERD_THREAD_METADATA_TIMER_EXIT";
@@ -195,6 +208,7 @@ int __testpoint_consumerd_thread_metadata_timer(void)
 
 /* Relay daemon */
 
+int __testpoint_relayd_thread_dispatcher(void);
 int __testpoint_relayd_thread_dispatcher(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_DISPATCHER_EXIT";
@@ -206,6 +220,7 @@ int __testpoint_relayd_thread_dispatcher(void)
 	return 0;
 }
 
+int __testpoint_relayd_thread_worker(void);
 int __testpoint_relayd_thread_worker(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_WORKER_EXIT";
@@ -218,6 +233,7 @@ int __testpoint_relayd_thread_worker(void)
 	return 0;
 }
 
+int __testpoint_relayd_thread_listener(void);
 int __testpoint_relayd_thread_listener(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_LISTENER_EXIT";
@@ -229,6 +245,7 @@ int __testpoint_relayd_thread_listener(void)
 	return 0;
 }
 
+int __testpoint_relayd_thread_live_dispatcher(void);
 int __testpoint_relayd_thread_live_dispatcher(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_LIVE_DISPATCHER_EXIT";
@@ -240,6 +257,7 @@ int __testpoint_relayd_thread_live_dispatcher(void)
 	return 0;
 }
 
+int __testpoint_relayd_thread_live_worker(void);
 int __testpoint_relayd_thread_live_worker(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_LIVE_WORKER_EXIT";
@@ -252,6 +270,7 @@ int __testpoint_relayd_thread_live_worker(void)
 	return 0;
 }
 
+int __testpoint_relayd_thread_live_listener(void);
 int __testpoint_relayd_thread_live_listener(void)
 {
 	const char *var = "LTTNG_RELAYD_THREAD_LIVE_LISTENER_EXIT";
