@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 - Jérémie Galarneau <jeremie.galarneau@efficios.com>
+ * Copyright (C) 2019 EfficiOS, inc.
  *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License, version 2.1 only,
@@ -15,8 +15,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#ifndef LTTNG_ACTION_H
-#define LTTNG_ACTION_H
+#ifndef LTTNG_ACTION_START_SESSION_H
+#define LTTNG_ACTION_START_SESSION_H
 
 struct lttng_action;
 
@@ -24,35 +24,23 @@ struct lttng_action;
 extern "C" {
 #endif
 
-enum lttng_action_type {
-	LTTNG_ACTION_TYPE_UNKNOWN = -1,
-	LTTNG_ACTION_TYPE_NOTIFY = 0,
-	LTTNG_ACTION_TYPE_START_SESSION = 1,
-};
-
-enum lttng_action_status {
-	LTTNG_ACTION_STATUS_OK = 0,
-	LTTNG_ACTION_STATUS_ERROR = -1,
-	LTTNG_ACTION_STATUS_UNKNOWN = -2,
-	LTTNG_ACTION_STATUS_INVALID = -3,
-	LTTNG_ACTION_STATUS_UNSET = -4,
-};
-
 /*
- * Get the type of an action.
+ * Create a newly allocated start-session action object.
  *
- * Returns the type of an action on success, LTTNG_ACTION_TYPE_UNKNOWN on error.
+ * Returns a new action on success, NULL on failure. This action must be
+ * destroyed using lttng_action_destroy().
  */
-extern enum lttng_action_type lttng_action_get_type(
-		struct lttng_action *action);
+extern struct lttng_action *lttng_action_start_session_create(void);
 
 /*
- * Destroy (frees) an action object.
+ * Set the session name of an lttng_action object of type
+ * LTTNG_ACTION_TYPE_START_SESSION.
  */
-extern void lttng_action_destroy(struct lttng_action *action);
+extern enum lttng_action_status lttng_action_start_session_set_session_name(
+		struct lttng_action *action, const char *session_name);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* LTTNG_ACTION_H */
+#endif /* LTTNG_ACTION_START_SESSION_H */
