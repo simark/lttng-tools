@@ -119,6 +119,7 @@ lttngactioninclude_HEADERS= \
 	lttng/action/action.h \
 	lttng/action/notify.h \
 	lttng/action/rotate-session.h \
+	lttng/action/snapshot-session.h \
 	lttng/action/start-session.h \
 	lttng/action/stop-session.h
 
