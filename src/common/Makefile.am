@@ -26,6 +26,7 @@ EXTRA_DIST = mi-lttng-3.0.xsd
 
 libcommon_la_SOURCES = \
 	actions/action.c \
+	actions/group.c \
 	actions/notify.c \
 	actions/rotate-session.c \
 	actions/snapshot-session.c \
