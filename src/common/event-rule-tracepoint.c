@@ -65,7 +65,7 @@ bool lttng_event_rule_tracepoint_validate(
 		ERR("Invalid tracepoint event rule: a pattern must be set.");
 		goto end;
 	}
-	if (!tracepoint->domain != LTTNG_DOMAIN_NONE) {
+	if (tracepoint->domain == LTTNG_DOMAIN_NONE) {
 		ERR("Invalid tracepoint event rule: a domain must be set.");
 		goto end;
 	}

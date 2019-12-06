@@ -174,36 +174,33 @@ ssize_t lttng_condition_event_rule_create_from_buffer(
 		const struct lttng_buffer_view *view,
 		struct lttng_condition **_condition)
 {
-	ssize_t offset = 0, event_rule_size;
+	ssize_t offset, event_rule_size;
 	const struct lttng_condition_event_rule_comm *comm;
 	struct lttng_condition *condition = NULL;
 	struct lttng_event_rule *event_rule = NULL;
 	struct lttng_buffer_view event_rule_view;
 
 	if (!view || !_condition) {
-		offset = -1;
-		goto end;
+		goto error;
 	}
 
 	if (view->size < sizeof(*comm)) {
 		ERR("Failed to initialize from malformed event rule condition: buffer too short to contain header");
-		offset = -1;
-		goto end;
+		goto error;
 	}
 
 	comm = (const struct lttng_condition_event_rule_comm *) view->data;
-	offset += sizeof(*comm);
+	offset = sizeof(*comm);
 
 	/* Struct lttng_event_rule */
 	event_rule_view = lttng_buffer_view_from_view(view, offset, -1);
 	event_rule_size = lttng_event_rule_create_from_buffer(&event_rule_view, &event_rule);
 	if (event_rule_size < 0 || !event_rule) {
-		goto end;
+		goto error;
 	}
 
 	if ((size_t) comm->length != event_rule_size) {
-		offset = -1;
-		goto end;
+		goto error;
 	}
 	
 	/* Move to the end */
@@ -211,8 +208,7 @@ ssize_t lttng_condition_event_rule_create_from_buffer(
 
 	condition = lttng_condition_event_rule_create(event_rule);
 	if (!condition) {
-		offset = -1;
-		goto end;
+		goto error;
 	}
 
 	/* Ownership passed on condition event rule create */
@@ -220,6 +216,11 @@ ssize_t lttng_condition_event_rule_create_from_buffer(
 
 	*_condition = condition;
 	condition = NULL;
+	goto end;
+
+error:
+	offset = -1;
+
 end:
 	lttng_event_rule_destroy(event_rule);
 	lttng_condition_destroy(condition);

@@ -44,7 +44,7 @@ extern enum lttng_event_rule_status lttng_event_rule_tracepoint_set_pattern(
 		struct lttng_event_rule *rule, const char *pattern);
 
 /*
- * Get the pattern of a tracecpoint event rule.
+ * Get the pattern of a tracepoint event rule.
  *
  * The caller does not assume the ownership of the returned pattern. The
  * pattern shall only only be used for the duration of the event rule's
